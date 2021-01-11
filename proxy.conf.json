@@ -1,0 +1,30 @@
+{
+    "/search/tweets.json/*": {
+        "target": "https://api.twitter.com/1.1/",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/settings": ""
+        },
+        "changeOrigin": true
+    },
+
+    "/statuses/*": {
+        "target": "https://api.twitter.com/1.1/",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/settings": ""
+        },
+        "changeOrigin": true
+    },
+    "/favorites/*": {
+        "target": "https://api.twitter.com/1.1/",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/settings": ""
+        },
+        "changeOrigin": true
+    }
+}

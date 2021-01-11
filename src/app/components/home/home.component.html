@@ -1,0 +1,59 @@
+<div class="containerS">
+    <!-- contenedor del campo de busqueda -->
+    <input class="inputSerch" type="text" (change)="buscarTwetts($event.target.value, 0)" (keypress)="keyPress($event)" placeholder="buscar...">
+    <div class="search"></div>
+</div>
+
+
+<cdk-virtual-scroll-viewport itemSize="280" class="card-twetts" (scrolledIndexChange)="validateScroll($event)">
+
+    <div class="row" *cdkVirtualFor="let row of rowTwetts; let i = index">
+
+        <div class="" *ngFor="let twett of rowTwetts[i]">
+
+            <div class="card-twett">
+                <div class="media">
+                    <img class="mr-2 rounded-square" [src]="twett.user.profile_image_url" alt="Generic placeholder image" height="32">
+                    <div class="media-body">
+                        <h6 class="m-0">{{cortar(twett.user.name, 14)}}</h6>
+                        <p class="text-muted"><small>@{{twett.user.screen_name}}</small></p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted font-14">{{cortar(twett.text, 20)}}</p>
+                </div>
+                <div class="card-footer">
+                    <i class="dripicons-reply"></i>
+                    <i class="dripicons-retweet" (click)="retwett(twett.id)"></i>
+                    <i class="dripicons-star" (click)="favorite(twett.id)"></i>
+
+                </div>
+
+            </div>
+            <div class="card-folding">
+                <div class="card-folding-header">
+                    <div class="twiter-semi-circle"><img class="twiter-semi-circle" src="../../../assets/images/twitter-logo2.png" alt=""></div>
+                    <div class="folding-item">
+                        <p> <a data-toggle="collapse" href="#collapseTwett{{twett.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">...mas</a></p>
+
+                    </div>
+                </div>
+                <!-- <div class="card-folding" > -->
+                <div class="collapse" id="collapseTwett{{twett.id}}">
+                    <div class="media-collapse">
+                        <p>{{ twett.created_at | date:'shortTime' }} - {{ twett.created_at | date:'longDate' }}</p>
+                    </div>
+                    <div class="body-collapse">
+                        <p>{{twett.text}}</p>
+                    </div>
+
+                </div>
+                <!-- </div> -->
+            </div>
+        </div>
+
+        <!-- end card -->
+    </div>
+
+
+</cdk-virtual-scroll-viewport>
