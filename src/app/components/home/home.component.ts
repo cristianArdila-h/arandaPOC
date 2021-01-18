@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   public rowTwetts: any = [];
   public stringSerch: string = '';
   public temparray: any[] = [];
-  @ViewChild( CdkVirtualScrollViewport, {static:true} ) viewport: CdkVirtualScrollViewport;
+  @ViewChild( CdkVirtualScrollViewport, {static:true} ) viewport !: CdkVirtualScrollViewport;
 
   constructor(private twtService: TwitterService) {
 
@@ -30,7 +30,8 @@ export class HomeComponent implements OnInit {
     });
   }
   buscarTwetts(value: any, tipeSerch: number) {
-    this.stringSerch = value;
+    console.log(value);
+    this.stringSerch = (this.stringSerch == '' ? value.target.value : this.stringSerch);
     this.twtService.serchTweets(value).subscribe((resp: any) => {
       this.twettsService = resp.statuses;
       this.rowTwettsGenerator(this.twettsService,tipeSerch);
